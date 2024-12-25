@@ -30,11 +30,29 @@ async function initialize() {
     layout: "accordion",
   };
 
-  const addressElement = elements.create('address', options);
   const paymentElement = elements.create('payment', paymentElementOptions);
-  addressElement.mount('#address-element');
   paymentElement.mount('#payment-element');
-  
+
+  // Check if the address element container exists before mounting
+  const addressElementContainer = document.querySelector('#address-element');
+  if (addressElementContainer) {
+    // Create and mount the full address element
+    const addressElementOptions = {
+      mode: 'shipping', // or 'billing' depending on your needs
+      fields: {
+        postalCode: 'auto', // Automatically include postal code
+        country: 'auto', // Automatically include country
+        line1: 'auto', // Automatically include address line 1
+        line2: 'auto', // Automatically include address line 2
+        city: 'auto', // Automatically include city
+        state: 'auto', // Automatically include state
+      },
+    };
+    const addressElement = elements.create('address', addressElementOptions);
+    addressElement.mount(addressElementContainer);
+  } else {
+    console.error("Address element container not found.");
+  }
 }
 
 async function handleSubmit(e) {
