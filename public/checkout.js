@@ -30,8 +30,11 @@ async function initialize() {
     layout: "accordion",
   };
 
-  const paymentElement = elements.create("payment", paymentElementOptions);
-  paymentElement.mount("#payment-element");
+  const addressElement = elements.create('address', options);
+  const paymentElement = elements.create('payment', paymentElementOptions);
+  addressElement.mount('#address-element');
+  paymentElement.mount('#payment-element');
+  
 }
 
 async function handleSubmit(e) {
@@ -42,7 +45,7 @@ async function handleSubmit(e) {
     elements,
     confirmParams: {
       // Make sure to change this to your payment completion page
-      return_url: "http://localhost:4242/complete.html",
+      return_url: "https://4242-martymcnutt-addresselem-ysp1gsqwvn9.ws-us117.gitpod.io//complete.html",
     },
   });
 
